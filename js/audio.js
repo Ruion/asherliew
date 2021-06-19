@@ -11,7 +11,6 @@
             volume: 0.6,
     });
 
-    sounds["PanelOpen"].mute();
     
     //  register buttons to play click sound
     function playClickSound(){
@@ -20,6 +19,7 @@
     }
 
     function playSound(type){
+        if(!window.gameLoaded) return;
         sounds[type].stop();
         sounds[type].play();
     }
@@ -46,10 +46,9 @@
     }
 
     function IOSFirstClickPlayBackgroundMusic(){
-        
+        window.gameLoaded = true;
         bgmSound.play();
         
-        sounds["PanelOpen"].mute(false);
         playSound("PanelOpen")
 
         sounds["Click"].play();
