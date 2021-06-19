@@ -39,12 +39,3 @@ body{
   .arc-icon, .arc-hold-active{
     pointer-events: auto;
   }
-
-
-  .unselectable {
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-}

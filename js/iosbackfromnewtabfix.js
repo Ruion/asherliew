@@ -11,7 +11,7 @@ window.IOS = function() {
   || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
 
-window.onblur = iosLoseFocusToNewTabAction;
+window.onblur = iosLoseFocusToNewTabAction();
 
 if(window.IOS())
 {
