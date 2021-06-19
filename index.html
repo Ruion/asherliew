@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>SpaceTour</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="stylesheet" href="css/orientation.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/arcmenu.css">
+    <link rel="stylesheet" href="css/orientation.css">
+  </head>
+  <body class="dark">
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '366100724847233',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v10.0'
+      });
+    };
+    </script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+    <div id="game-orientation">
+      <div>
+        <div>
+          <p style="white-space: pre-line; margin-top: -5%">Please rotate your device to landscape mode 
+            for best gaming experience</p>
+          <img id="arrow-top" src="img/arrow-1.svg"/>
+          <img id="phone-image" src="img//phone.png"/>
+          <img id="arrow-bottom" src="img/arrow-2.svg"/>
+          <p style="white-space: pre-line">Best viewed on Chrome or Safari browser</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas"></canvas>
+    </div>
+    <div id="loading-cover" style="display:none;">
+      <div id="unity-loading-bar">
+        <div id="unity-logo"><img src="logo.png"></div>
+        <div id="unity-progress-bar-empty" style="display: none;">
+          <div id="enter-btn">Start</div>
+          <p id="volume-tips">Turn up the volume for best experience</p>
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+    </div>
+    <div id="unity-fullscreen-button" style="display: none;"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+      window.hostPath = window.location.hostname;
+      const hideFullScreenButton = "1";
+      const buildUrl = "Build";
+      const loaderUrl = buildUrl + "/webgltest.loader.js";
+      const config = {
+        dataUrl: buildUrl + "/webgltest.data.unityweb",
+        frameworkUrl: buildUrl + "/webgltest.framework.js.unityweb",
+        codeUrl: buildUrl + "/webgltest.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Asher",
+        productName: "SpaceTour",
+        productVersion: "0.1",
+      };
+
+      const container = document.querySelector("#unity-container");
+      const canvas = document.querySelector("#unity-canvas");
+      const loadingCover = document.querySelector("#loading-cover");
+      const progressBarEmpty = document.querySelector("#unity-progress-bar-empty");
+      const progressBarFull = document.querySelector("#unity-progress-bar-full");
+      const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+
+      const canFullscreen = (function() {
+        for (const key of [
+            'exitFullscreen',
+            'webkitExitFullscreen',
+            'webkitCancelFullScreen',
+            'mozCancelFullScreen',
+            'msExitFullscreen',
+          ]) {
+          if (key in document) {
+            return true;
+          }
+        }
+        return false;
+      }());
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        // config.devicePixelRatio = 1;
+      }
+      loadingCover.style.display = "";
+
+      const script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarEmpty.style.display = "";
+          progressBarFull.style.width = `${100 * progress}%`;
+        }).then((unityInstance) => {
+          window.sceneLoaded = true;
+          // loadingCover.style.display = "none";
+
+          // fade out loading screen after 2 seconds
+          setTimeout(function(){
+            $(`#unity-progress-bar-full`).addClass(`fade-out`);
+            $(`#unity-progress-bar-empty`).addClass(`fade-out-bar-empty`);
+
+            setTimeout(function(){
+              $(`#enter-btn`).fadeIn(1500);
+              setTimeout(function(){
+                        $(`#enter-btn`).css('transition', 'all 0.5s ease');
+                        $(`#enter-btn`).css('cursor', 'pointer');
+                        $(`#enter-btn`).css('pointer-events', 'auto');
+                        $(`#enter-btn`).click(Start);
+                  }, 1000);
+
+            }, 1500);
+          }, 1500);
+
+          if (canFullscreen) {
+            if (!hideFullScreenButton) {
+              fullscreenButton.style.display = "";
+            }
+            fullscreenButton.onclick = () => {
+              unityInstance.SetFullscreen(1);
+            };
+          }
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+
+      function Start(){
+         // fade out loading screen after 2 seconds
+         setTimeout(function(){
+            $(`#loading-cover`).fadeOut(500);
+          }, 200);
+
+          IOSFirstClickPlayBackgroundMusic();
+      }
+    </script>
+
+  <script>
+    // mobile show rotate to landscape
+    // window.orientationMood = "portrait";
+    window.orientationMood = "landscape";
+    // window.onresize = applyOrientation;
+
+    window.addEventListener('resize', applyOrientationTip);
+
+    $(document).ready(function(){
+      applyOrientationTip();
+    })
+
+  function applyOrientationTip() {
+    if (window.innerHeight < window.innerWidth) {
+  //    alert("You are now in 1111");
+    if(window.orientationMood != "landscape") return;
+
+    $(`#game-orientation`).hide();
+    $(`#game-orientation`).css('opacity', '0');
+    } else {
+      if (window.innerHeight < window.innerWidth) {
+    //  alert("You are now in 2222");
+    } else {
+      // alert("You are now in horizontal");
+    if(window.orientationMood !== "landscape") return;
+      $(`#game-orientation`).show();
+    $(`#game-orientation`).css('opacity', '1');
+    }
+  }}
+  </script>
+
+
+  <div data-include="orientation"></div>
+  <div id="arc-menu-contact" class="arc-menu-div"></div>
+  <div id="arc-menu-share" class="arc-menu-div"></div>
+    
+  <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
+  <script src="js/arcmenu.js"></script>
+  <script src="js/contactarcmenu.js"></script>
+  <!-- <script src="js/sharearcmenu.js"></script> -->
+  <script src="js/iosorientationfix.js"></script>
+  <script src="js/iosbackfromnewtabfix.js"></script>
+  <script src="js/audio.js"></script>
+
+  <script>
+    $(function () {
+      var includes = $('[data-include]')
+      $.each(includes, function () {
+        var file = 'views/' + $(this).data('include') + '.html'
+        $(this).load(file)
+      })
+    })
+  </script>
+    
+  </body>
+</html>

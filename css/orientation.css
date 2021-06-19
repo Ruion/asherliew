@@ -1,0 +1,88 @@
+@media screen and (orientation: portrait) {
+    #game-orientation{
+        width: 100vw;
+        height: 100vh;
+        background: black;
+        position: fixed;
+        z-index: 9999999;
+        display: block;
+        top: 0;
+        left:0;
+    }
+}
+
+  
+@media screen and (orientation: landscape) {
+    #game-orientation{
+        display: none;
+    }
+
+  }
+
+
+  #game-orientation{
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    position: fixed;
+    z-index: 9999999;
+    display: block;
+    top: 0;
+    left:0;
+    opacity: 0;
+    display: none;
+}
+
+#game-orientation p{
+    color: white;
+    margin: 12% 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 90%;
+}
+
+#game-orientation > div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#arrow-top, #arrow-bottom{
+    width: 20%;
+    display: block;
+    margin: 2% auto;
+}
+
+#arrow-top{
+    transform: translateX(60%);
+}
+
+#arrow-bottom{
+    transform: translateX(-60%);
+}
+
+#phone-image {
+    -webkit-animation: rotation 1.5s infinite ease-out;
+    width: 30%;
+    margin: auto;
+}
+
+@-webkit-keyframes rotation {
+    /* from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(-90deg);
+    } */
+
+    0% { -webkit-transform: rotate(0deg); }
+    50% { -webkit-transform: rotate(-90deg); opacity : 1 }
+    80% { -webkit-transform: rotate(-90deg); opacity : 0 }
+    81% { -webkit-transform: rotate(0deg); }
+    90% { opacity : 1 }
+    100% { }
+}

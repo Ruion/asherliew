@@ -1,0 +1,37 @@
+<div id="game-orientation">
+  <div>
+    <div>
+  <p style="white-space: pre-line; margin-top: -5%">Please rotate your device to landscape mode 
+    for best gaming experience</p>
+  <img id="arrow-top" src="img/arrow-1.svg"/>
+  <img id="phone-image" src="img/phone.png"/>
+  <img id="arrow-bottom" src="img/arrow-2.svg"/>
+  <p style="white-space: pre-line">Best viewed on Chrome or Safari Browser</p>
+  </div>
+  </div>
+</div>
+
+<script>
+
+window.addEventListener('resize', applyOrientation())
+
+$(document).ready(function(){
+     applyOrientation();
+   
+ }) ;
+
+function applyOrientation() {
+  if (window.innerHeight < window.innerWidth) {
+//    alert("You are now in 1111");
+   $(`#game-orientation`).hide();
+   $(`#game-orientation`).css('opacity', '0');
+  } else {
+    if (window.innerHeight < window.innerWidth) {
+   alert("You are now in 2222");
+  } else {
+    // alert("You are now in 33333");
+    $(`#game-orientation`).show();
+   $(`#game-orientation`).css('opacity', '1');
+  }
+}}
+</script>

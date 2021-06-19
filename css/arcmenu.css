@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+  
+body{
+  min-height:100vh;
+  height:100%;
+  overflow:hidden;
+  min-height: -webkit-fill-available;
+  position: relative;
+  background: black;
+}
+  
+  .arc-menu-div{
+    position: fixed;
+    width: clamp(100px, 20vw , 180px);
+    bottom: 0;
+    display: grid;
+    pointer-events: auto;
+  }
+  
+  #arc-menu-contact{
+    right: 0;
+  }
+  
+  #arc-menu-share{
+    left: 0;
+  }
+  
+  .no-event{
+    pointer-events: none;
+  }
+  
+  .arc-icon, .arc-hold-active{
+    pointer-events: auto;
+  }
