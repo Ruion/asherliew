@@ -15,7 +15,7 @@ window.onblur = iosLoseFocusToNewTabAction;
 
 function iosLoseFocusToNewTabAction(){
     if(window.IOS() == true){
-      if((`#continue-panel`).length > 0) return;
+      // if((`#continue-panel`).length > 0) return;
         $(`body`).append(`
           <div id="continue-panel" style="position: fixed; width:100vw; height: 100vh; z-index: 999999; background: black; top: 0;
           left: 0;">
