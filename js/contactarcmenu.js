@@ -34,19 +34,19 @@ $(document).ready(function(){
 
       $(`${parentId} .FB`).click(function(){
           window.open(`https://www.facebook.com/xiaopol/`);
-          iosLoseFocusToNewTabAction();
+          // iosLoseFocusToNewTabAction();
           onRelease(parentId);
       });
 
       $(`${parentId} .IG`).click(function(){
         window.open(`https://www.instagram.com/asher_liew/`);
-        iosLoseFocusToNewTabAction();
+        // iosLoseFocusToNewTabAction();
         onRelease(parentId);
       });
 
       $(`${parentId} .BE`).click(function(){
         window.open(`https://www.behance.net/asherliew`);
-        iosLoseFocusToNewTabAction();
+        // iosLoseFocusToNewTabAction();
         onRelease(parentId);
      });
 
