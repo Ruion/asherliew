@@ -46,7 +46,6 @@
     }
 
     function IOSFirstClickPlayBackgroundMusic(){
-        window.gameLoaded = true;
         bgmSound.play();
         
         playSound("PanelOpen")

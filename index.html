@@ -142,8 +142,9 @@
       function Start(){
          // fade out loading screen after 2 seconds
          setTimeout(function(){
-            $(`#loading-cover`).fadeOut(500);
-          }, 200);
+            $(`#loading-cover`).fadeOut(500, 
+              function(){ window.gameLoaded = true; });
+            }, 200);
 
           IOSFirstClickPlayBackgroundMusic();
       }
