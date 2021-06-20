@@ -1,9 +1,11 @@
 
     window.addEventListener('resize', function() {
-
         resizeViewport()
-
     });
+
+    $(document).ready(function(){
+        resizeViewport()
+    })
 
     // setInterval(resizeViewport, 5000);
 
